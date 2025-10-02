@@ -7,30 +7,62 @@ Refer [uv official documentation](https://docs.astral.sh/uv/) for more detail:
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-## Create virtual env
-Initialize ``.venv`` virtual env:
+## Create a UV application
+Application are the default target for ```uv init```, but can also be specified with the ```--app``` flag and ```--package``` flag:
 ```
-uv venv
-```
- 
-Install dependency in virtual env:
-```
-uv pip install -r requirements.txt
+uv init --app --package --python python3.11 tcli
+cd tcli
 ```
 
-Activate ```.venv``` virtual env:
+Install typer:
 ```
-source .venv/bin/activate
-```
-
-Deactivate ```.venv``` virtual env:
-```
-deactivate
+uv add typer
 ```
 
-## Compile (lock) your requirements
-Use following command to lock version of dependency:
+Install pytest with coverage as development dependency:
 ```
-uv pip compile requirements.in -o requirements.txt
+uv add --dev pytest pytest-cov pyyaml lark
 ```
-Note: The above step is to be done outside virtual environment.
+
+Run pytest:
+```
+uv run pytest
+uv run pytest -v 
+```
+
+Run pytest with coverage:
+```
+uv run pytest --cov=tcli
+uv run pytest --cov=tcli --cov-report=term-missing
+```
+
+Run tcli in uv virtual env:
+```
+uv run tcli
+```
+
+Install tcli systemwide:
+```
+uv tool install . -e
+```
+
+Uninstall tcli:
+```
+uv tool uninstall . -e
+```
+
+
+
+BrainStorm
+
+tcli start doc
+tcli stop doc
+
+tcli start omniverse --ros2 --name omni
+tcli stop omniverse
+
+tcli start isaacsim --ros2 --name isaac_sim
+tcli stop isaacsim
+
+tcli start isaaclab --ros2 --cloudxr --name isaac_lab
+tcli stop isaaclab

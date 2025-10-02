@@ -1,21 +1,19 @@
+import time
+
 import typer
-from typing_extensions import Annotated
+from rich.progress import Progress, SpinnerColumn, TextColumn
 
 
-def main(
-    name: Annotated[str, typer.Argument(help="Who to greet")],
-    lastname: Annotated[
-        str, typer.Argument(help="The last name", rich_help_panel="Secondary Arguments")
-    ] = "",
-    age: Annotated[
-        str,
-        typer.Argument(help="The user's age", rich_help_panel="Secondary Arguments"),
-    ] = "",
-):
-    """
-    Say hi to NAME very gently, like Dirk.
-    """
-    print(f"Hello {name}")
+def main():
+    with Progress(
+        SpinnerColumn(),
+        TextColumn("[progress.description]{task.description}"),
+        transient=True,
+    ) as progress:
+        progress.add_task(description="Processing...", total=None)
+        progress.add_task(description="Preparing...", total=None)
+        time.sleep(5)
+    print("Done!")
 
 
 if __name__ == "__main__":

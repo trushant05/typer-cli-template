@@ -1,0 +1,27 @@
+[project]
+name = "tcli"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "trushant05", email = "trushant@umich.edu" }
+]
+requires-python = ">=3.11"
+dependencies = [
+    "lark>=1.2.2",
+    "pyyaml>=6.0.2",
+    "typer>=0.17.4",
+]
+
+[project.scripts]
+tcli = "tcli.main:app"
+
+[build-system]
+requires = ["uv_build>=0.8.15,<0.9.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.4.2",
+    "pytest-cov>=7.0.0",
+]
